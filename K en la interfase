@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\usepackage{vmargin}
+
+\setpapersize{A4}
+\setmargins{2.5cm}       % margen izquierdo
+{1.5cm}                        % margen superior
+{16.5cm}                      % anchura del texto
+{23.42cm}                    % altura del texto
+{10pt}                           % altura de los encabezados
+{1cm}                           % espacio entre el texto y los encabezados
+{0pt}                             % altura del pie de página
+{2cm}                           % espacio entre el texto y el pie de página
+
+\title{La conductividad de la interfaz}
+\author{KIMIO JOSE VILLALOBOS MARTINEZ}
+\date{December 2022}
+
+\begin{document}
+\maketitle
+El procedimiento más directo para obtener la conductividad de la interfaz k es asumir una variación lineal de k entre los puntos P y E.\\
+\\
+Entonces: \\
+\begin{center}
+$k_e=f_ek_p+(1-f_e)k_E$ \hspace{1cm}\tag{(1)}\\
+\end{center}
+
+Donde el factor de interpolación $f_e$ es una relación definida en términos de las distancias mostradas en la siguiente ecuación:\\
+\begin{center}
+$f_e\equiv \frac{(\delta x)_e_+}{(\delta x)_e}$ \hspace{1cm}\tag{(2)}
+\end{center}
+Si la interfaz e, estuviera a la mitad de distancia entre los puntos de la cuadrícula, $f_e$ sería 0,5 y $k_e$ sería el promedio de $k_p$ y $k_E$.\\
+
+Se mostrará que este enfoque puede conducir a implicaciones que son incorrectas en algunos casos y no puede manejar con precisión los cambios abruptos de conductividad que pueden suceder en los materiales compuestos. \\
+
+\begin{center}
+\includegraphics{k en la interfase.png}\\
+Figura 1: Distancias asociadas con la interfase e.\\
+\end{center}
+
+Afortunadamente, existe una alternativa mucho mas simple. En esta alternativa reconocemos que no es el valor local de la conductividad en la interfaz e lo que nos preocupa. El principal objetivo es obtener una buena representación del flujo de calor $q_e$ en la interfaz, a través de:\\
+
+\begin{center}
+    $q_e=\frac{k_e(T_p-T_E)}{(\delta x)_e}$ \hspace{1cm}\tag{(3)}
+\end{center}
+De hecho esta expresión se ha utilizado para derivar la ecuación de discretización. La expresión deseada para $k_e$ es la que conduce a un $q_e$ correcto. Consideremos que el volumen de control que rodea al punto P de la grilla está lleno de un material de conductividad uniforme $k_e$. Para la losa mixta entre los puntos P y E, un análisis unidimensional constante (sin fuentes) conduce a:\\
+
+\begin{center}
+    $q_e=\frac{(T_p-T_E)}{(\delta x)_e_-/k_p+\delta x)_e_+/k_E}$ \hspace{1cm}\tag{(4)}
+\end{center}
+
+De la combinación de las ecuaciones 3 y 4, se tiene que:\\
+
+\begin{center}
+    $k_e=(\frac{1-f_e}{k_p}+\frac{f_e}{k_E})^-^1$ \hspace{1cm} \tag{(5)} 
+\end{center}
+
+Cuando la interfaz e se coloca entre la mitad de la distacnai entre P y E, se tiene que $f_e=0,5$, entonces:\\
+
+\begin{center}
+    $k_e^-^1=0,5(k_p^-^1+k_E^-^1)$ \hspace{1cm} \tag{(6)} 
+\end{center}
+
+o
+
+\begin{center}
+    $k_e=\frac{2k_pk_E}{k_p+k_E}$ \hspace{1cm} \tag{(7)}
+\end{center}
+
+Las ecuaciones 6 y 7 muestran que $k_e$ es la media harmonica de $k_p$ y $k_E$, en lugar de la media aritmética que muestra la ecuación 1 cuando $f_e=0,5$
+
+\end{document}
