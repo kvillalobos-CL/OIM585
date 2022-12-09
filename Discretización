@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\renewcommand{\baselinestretch}{1.5} % Interlineado 1.5
+\usepackage{vmargin}
+
+\setpapersize{A4}
+\setmargins{2.5cm}       % margen izquierdo
+{1.5cm}                        % margen superior
+{16.5cm}                      % anchura del texto
+{23.42cm}                    % altura del texto
+{10pt}                           % altura de los encabezados
+{1cm}                           % espacio entre el texto y los encabezados
+{0pt}                             % altura del pie de página
+{2cm}                           % espacio entre el texto y el pie de página
+
+\title{Ecuación de discretización}
+\author{KIMIO JOSE VILLALOBOS MARTINEZ}
+\date{December 2022}
+
+\begin{document}
+\maketitle
+
+La ecuación diferencial de transferencia de calor por conducción en dos dimensiones, está dada por:
+
+\begin{equation}
+    \rho c_p\frac{\partial T }{\partial t}=\frac{\partial}{\partial x}(k\frac{\partial T}{\partial x})+\frac{\partial}{\partial y}(k\frac{\partial T}{\partial y})
+\end{equation}
+
+\begin{center}
+    \includegraphics{VC nodo.png}\\
+    Figura 1: Volumen de control en un nodo interno
+\end{center}
+Integrando la ecuación (1) sobre el volumen de control que se muestra en la Figura 1 y sobre un intervalo de tiempo desde $t$ a $t + \Delta t
+
+\begin{equation}
+    \rho c_{p}\int_{cv}\int_{t}^{t+\Delta t} \frac{\partial T}{\partial t}\,dt\,dv = \int_{t}^{t+\Delta t}\int_{E}^{W} \frac{\partial}{\partial x}\biggl(k\frac{\partial T}{\partial x}\biggl)\,dx\,dt+\int_{t}^{t+\Delta t}\int_{S}^{N} \frac{\partial}{\partial y}\biggl(k\frac{\partial T}{\partial y}\biggl)\,dy\,dt+S
+\end{equation}
+
+El primer término corresponde a la parte acumulativa de la ecuación de energía, el cual es:
+
+\begin{equation}
+    \rho c_{p}\int_{cv}\int_{t}^{t+\Delta t} \frac{\partial T}{\partial t}\,dt\,dv \equiv \rho c_{p}(T^1_P-T^0_P)\Delta x\Delta y
+\end{equation}
+
+El término conductivo en el eje X, se puede aproximar por:
+
+\begin{equation}
+    \int_{t}^{t+\Delta t}\int_{E}^{W} \frac{\partial}{\partial x}\biggl(k\frac{\partial T}{\partial x}\biggl)\,dx\,dt \equiv \int_{t}^{t+\Delta t} \biggl[ \frac{k_E(T_E-T_P)}{\delta_{PE}}-\frac{k_W(T_P-T_W)}{\delta_{PW}}\biggl]\Delta y dt  
+\end{equation}
+
+\begin{equation}
+    \equiv f \biggl [ \frac{k_E(T^1_E-T^1_P)}{\delta_{PE}}-\frac{k_W(T^1_P-T^1_W)}{\delta_{PW}}\biggl]\Delta y \Delta t - (1 - f)\biggl[ \frac{k_E(T^0_E-T^0_P)}{\delta_{PE}}-\frac{k_W(T^0_P-T^0_W)}{\delta_{PW}}\biggl]\Delta y \Delta t  
+\end{equation}
+
+Similarmente en el eje y
+
+\begin{equation}
+    \int_{t}^{t+\Delta t}\int_{S}^{N} \frac{\partial}{\partial y}\biggl(k\frac{\partial T}{\partial y}\biggl)\,dy\,dt \equiv \int_{t}^{t+\Delta t} \biggl[ \frac{k_S(T_S-T_P)}{\delta_{PS}}-\frac{k_N(T_P-T_N)}{\delta_{PN}}\biggl]\Delta x dt  
+\end{equation}
+
+\begin{equation}
+    \equiv f \biggl [ \frac{k_S(T^1_S-T^1_P)}{\delta_{PS}}-\frac{k_N(T^1_P-T^1_N)}{\delta_{PN}}\biggl]\Delta x \Delta t - (1 - f)\biggl[ \frac{k_S(T^0_S-T^0_P)}{\delta_{PS}}-\frac{k_N(T^0_P-T^0_N)}{\delta_{PN}}\biggl]\Delta x \Delta t  
+\end{equation}
+
+Si f=1 (esquema implicito) y reagrupando, se da la ecuación de discretización para los nodos internos, la cual está dada por:
+
+\begin{equation}
+    \frac{\rho c_p}{\Delta t} (T_P - T^0_P) \Delta x \Delta y = \biggl[\frac{k_E(T_E-T_P)dy}{\delta_{PE}}-\frac{k_W(T_P-T_W)}{\delta_{PW}}\biggl] \Delta y + \biggl[\frac{k_S(T_S-T_P)}{\delta_{PS}}-\frac{k_W(T_P-T_N)}{\delta_{PN}}\biggl] \Delta x
+\end{equation}
+
+Desarrollando la expresión:
+
+\begin{equation}
+    \frac{\rho c_p}{\Delta t} \Delta x \Delta y T_P - \frac{\rho c_p}{\Delta t} \Delta x \Delta y T^0_P =
+\end{equation}
+
+\begin{equation}
+    \frac{k_E}{\delta_{PE}} \Delta y T_E - \frac{k_E}{\delta_{PE}} \Delta y T_P - \frac{k_W}{\delta_{PW}} \Delta y T_P\ + \frac{k_W}{\delta_{PW}} \Delta y T_W + \frac{k_S}{\delta_{PS}} \Delta x T_S - \frac{k_S}{\delta_{PS}} \Delta x T_P\ - \frac{k_N}{\delta_{PN}} \Delta x T_P + \frac{k_N}{\delta_{PN}} \Delta x T_N\
+\end{equation}
+
+\begin{equation}
+    \biggl(\frac{\rho c_p}{\Delta t} \Delta x \Delta y + \frac{k_N}{\delta_{PN}} \Delta y + \frac{k_S}{\delta_{PS}} \Delta y + \frac{k_E}{\delta_{PE}} \Delta x + \frac{k_W}{\delta_{PW}} \Delta x \biggl) T_P =\
+\end{equation}
+
+\begin{equation}
+    \frac{k_N}{\delta_{PN}} \Delta x T_N + \frac{k_S}{\delta_{PS}} \Delta x T_S + \frac{k_E}{\delta_{PE}} \Delta y T_E\ + \frac{k_W}{\delta_{PW}} \Delta y T_W + \frac{\rho c_p}{\Delta t} \Delta x \Delta y T^0_P
+\end{equation}
+
+La ecuación de discretización es:
+
+\begin{equation}
+    a_P T_P = a_N T_N + a_S T_S + a_E T_E + a_W T_W + b_p\
+\end{equation}
+
+Donde:
+\begin{equation}
+    a_N = \frac{k_N}{\delta_{PN}}\Delta x\
+\end{equation}
+
+\begin{equation}
+    a_S = \frac{k_S}{\delta_{PS}}\Delta x\
+\end{equation}
+
+\begin{equation}
+    a_E = \frac{k_E}{\delta_{PE}}\Delta y\
+\end{equation}
+
+\begin{equation}
+    a_W = \frac{k_W}{\delta_{PW}}\Delta y\
+\end{equation}
+
+\begin{equation}
+    a_0 = \frac{\rho c_p}{\Delta t}\Delta x \Delta y\
+\end{equation}
+
+\begin{equation}
+    a_P = a_N + a_S + a_E + a_W
+\end{equation}
+
+\begin{equation}
+    b_P = a_0 T^0_P
+\end{equation}
+
+\end{document}
