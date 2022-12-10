@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\usepackage{vmargin}
+
+\setpapersize{A4}
+\setmargins{2.5cm}       % margen izquierdo
+{1.5cm}                        % margen superior
+{16.5cm}                      % anchura del texto
+{23.42cm}                    % altura del texto
+{10pt}                           % altura de los encabezados
+{1cm}                           % espacio entre el texto y los encabezados
+{0pt}                             % altura del pie de página
+{2cm}                           % espacio entre el texto y el pie de página
+
+\title{Scheme EDS}
+\author{KIMIO JOSE VILLALOBOS MARTINEZ}
+\date{December 2022}
+
+\begin{document}
+\maketitle
+El flujo de calor que corresponde a la convección es:
+
+\begin{equation}
+    \rho u \phi
+\end{equation}
+
+El flujo de calor que corresponde a la difusión:
+
+\begin{equation}
+    -\Gamma \cdot \frac{d\phi}{dx}
+\end{equation} 
+
+ Considerando a $J$ como la suma de los flujos de convección y difusión. Se tiene que:
+
+\begin{equation}
+    \frac{dJ}{dx}=0
+\end{equation}
+
+Integrando sobre el volumen de control, se tiene que
+
+\begin{equation}
+    J_e-J_w=0
+\end{equation}
+
+La solución exacta de la ecuación está dada por la siguiente expresión:
+
+\begin{equation}
+    \frac{\phi - \phi_0}{\phi_L - \phi_0} = \frac{e^{Px/L}-1}{e^P - 1}
+\end{equation}
+
+$P$ Corresponde al número de Peclet. Se calcula como:
+
+\begin{equation}
+    P=\frac{\rho u L}{\Gamma}
+\end{equation}
+
+Al integrar las ecuaciones bajo el volumen de control, se obtiene la siguiente expresión:
+
+\begin{equation}
+    F_e\left(\phi_P+\frac{\phi_P - \phi_E}{e^{P_e} - 1}\right) - F_w\left(\phi_P+\frac{\phi_W - \phi_P}{e^{P_w} - 1}\right)=0
+\end{equation}
+
+Que es equivalente a:
+
+\begin{equation}
+    a_P\phi_P = a_E\phi_E + a_W \phi_W
+\end{equation}
+
+Donde:
+\begin{equation}
+    a_E=\frac{F_e}{e^{P_e}-1}
+\end{equation}
+\begin{equation}
+    a_W=\frac{F_w}{e^{P_w}-1}
+\end{equation}
+\begin{equation}
+    a_P = a_E + a_W + (F_e - F_w)
+\end{equation}
+
+\end{document}
+    
