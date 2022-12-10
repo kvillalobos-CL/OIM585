@@ -1,0 +1,212 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\usepackage{vmargin}
+
+\setpapersize{A4}
+\setmargins{2.5cm}       % margen izquierdo
+{1.5cm}                        % margen superior
+{16.5cm}                      % anchura del texto
+{23.42cm}                    % altura del texto
+{10pt}                           % altura de los encabezados
+{1cm}                           % espacio entre el texto y los encabezados
+{0pt}                             % altura del pie de página
+{2cm}                           % espacio entre el texto y el pie de página
+
+\title{Ecuación de difusión en coordenadas cilíndricas y esféricas}
+\author{KIMIO JOSE VILLALOBOS MARTINEZ}
+\date{December 2022}
+
+\begin{document}
+\maketitle
+\section{Ecuación de difusión del calor en coordenadas cilíndricas}
+
+\begin{center}
+    \includegraphics{coordenadas cilÃ­ndricas.png}\\
+    Figura 1: Representación de diferenciales de difusión de calor.\\ Fuente: Universidad Politécnica de Valencia.
+\end{center}
+
+De la Figura 1, se obtiene la siguiente expresión:
+\begin{equation}
+    (\dot{q_r}-\dot{q_r}+d\dot{q_r})+(\dot{q_\phi}-\dot{q_\phi}+d\dot{q_\phi})+(\dot{q_z}-\dot{q_z}+d\dot{q_z})+\dot{g_v}\cdot dV=m\cdot C_p\cdot\frac{dT}{dt}
+\end{equation}
+Para realizar la transformación de coordenadas cartesianas a coordenadas cilíndricas, se deben definir las siguientes coordenadas:
+
+\begin{equation}
+    x=r\cdot cos\phi\cdot
+\end{equation}
+
+\begin{equation}
+    y=r\cdot sen\phi\cdot
+\end{equation}
+
+\begin{equation}
+    z=z
+\end{equation}
+
+Se tiene que:
+
+\begin{equation}
+    d\dot{q_r}+d\dot{q_\phi}+d\dot{q_z}+\dot{g_v}\cdot dV=\rho\cdot dV\cdot C_p\cdot \frac{dT}{dt}
+\end{equation}
+
+El diferencial de volumen se define como:
+
+\begin{equation}
+    dV=dr\cdot r\cdot d\phi\cdot dz
+\end{equation}
+
+Dividiendo la ecuación (5) con la ecuación (6), se tiene que la siguiente expresión:
+
+\begin{equation}
+    \frac{d\dot{q_r}}{dr\cdot r\cdot d\phi\cdot dz}+\frac{d\dot{q_\phi}}{dr\cdot r\cdot d\phi\cdot dz}+\frac{d\dot{q_z}}{dr\cdot r\cdot d\phi\cdot dz}+\dot{g_v}=\rho\cdot C_p\cdot \frac{dT}{dt}
+\end{equation}
+La cantidad de calor que entra dentro del volumen diferencial en cada una de las direcciones que conforman el sistema de coordenadas sigue la Ley de Fourier, por lo cual surgen las siguientes expresiones:
+
+\begin{equation}
+    \dot{q_r}=k\cdot dA_r\cdot \frac{dT}{dl_r}
+\end{equation}
+
+\begin{equation}
+    \dot{q_\phi}=k\cdot dA_\phi\cdot \frac{dT}{dl_\phi}
+\end{equation}
+
+\begin{equation}
+    \dot{q_z}=k\cdot dA_z\cdot \frac{dT}{dl_z}
+\end{equation}
+
+Los diferenciales de área y longitud, respectivamente, quedan de la siguiente forma:
+
+\begin{equation}
+    dA_r=rd\phi\cdot dz
+\end{equation}
+
+\begin{equation}
+    dA_\phi=dr\cdot dz
+\end{equation}
+
+\begin{equation}
+    dA_z=dr\cdot rd\phi
+\end{equation}
+
+\begin{equation}
+    dl_r=dr
+\end{equation}
+
+\begin{equation}
+    dl_\phi=r\cdot d\phi
+\end{equation}
+
+\begin{equation}
+    dl_z=dz
+\end{equation}
+Sustituyendo en la ecuación (7) el calor con sus correspondientes valores de la Ley de Fourier (8, 9, 10) y también se sustituye los diferenciales de área con los de longitud (11, 12, 13, 14, 15, 16) con sus respectivos valores, se obtiene la siguiente expresión:
+
+\begin{equation}
+    \frac{d \Bigr[ k\cdot rd\phi\cdot dz\cdot \frac{dT}{dr} \Bigr] }{dr\cdot r\cdot d\phi\cdot dz}+\frac{d \left[ k\cdot dr\cdot dz\cdot \frac{dT}{r\cdot d\phi} \right] }{dr\cdot r\cdot d\phi\cdot dz}+\frac{d \Bigr[ k\cdot dr\cdot rd\phi\cdot \frac{dT}{dz} \Bigr] }{dr\cdot r\cdot d\phi\cdot dz}+\dot{g_v}=\rho\cdot C_p\cdot \frac{dT}{dt}
+\end{equation}
+
+Se observa que se pueden simplificar términos, por lo cual, la expresión queda de la siguiente manera:
+
+\begin{equation}
+    \frac{1}{r}\frac{d}{dr}\biggr[k\cdot r\frac{dT}{dr}\biggr]+\frac{1}{r^2}\frac{d}{d\phi}\biggr[k\cdot \frac{dT}{d\phi}\biggr]+\frac{d}{dz}\biggr[k\cdot \frac{dT}{dz}\biggr]+\dot{g_v}=\rho\cdot C_p\cdot \frac{dT}{dt}
+\end{equation}
+
+\newpage %salto de página
+
+\section{Ecuación de difusión del calor en coordenadas esféricas}
+
+\begin{center}
+    \includegraphics{esfericas.png}\\
+    Figura 2:
+\end{center}
+Se define un volumen diferencial en coordenadas esféricas, en las coordenadas esféricas, un punto viene definido por 3 parámetros: el primero es el radio respecto a un origen de coordenadas, el segundo es el angulo $\phi$ que es el ángulo de la proyección del radio respecto de una referencia que se considera ángulo 0, el tercero es el ángulo que forma el radio.\\
+
+Para transformar de coordenadas cartesianas a coordenadas esféricas, se utilizan las siguientes ecuaciones:
+
+\begin{equation}
+    x=r\cdot cos\phi\cdot sen\theta
+\end{equation}
+
+\begin{equation}
+    y=r\cdot sen\phi\cdot sen\theta
+\end{equation}
+
+\begin{equation}
+    z=r\cdot cos\phi
+\end{equation}
+
+Se tiene que:
+
+\begin{equation}
+    d\dot{q_r}+d\dot{q_\phi}+d\dot{q_\theta}+\dot{g_v}\cdot dV=\rho\cdot dV\cdot C_p\cdot\frac{dT}{dt}
+\end{equation}
+
+El diferencial de volumen, es de la siguiente forma:
+
+\begin{equation}
+    dV=dr\cdot r\cdot sen\theta\cdot d\phi\cdot rd\theta
+\end{equation}
+
+Dividiendo (22) entre (23), queda:
+
+\begin{equation}
+    \frac{d\dot{q_r}}{dr\cdot r\cdot sen\theta\cdot d\phi\cdot rd\theta}+\frac{d\dot{q_\phi}}{dr\cdot r\cdot sen\theta\cdot d\phi\cdot rd\theta}+\frac{d\dot{q_\theta}}{dr\cdot r\cdot sen\theta\cdot d\phi\cdot rd\theta}+\dot{g_v}=\rho\cdot C_p\cdot \frac{dT}{dt}
+\end{equation}
+
+Si el calor que entra dentro del volumen diferencial, sigue la Ley de Fourier, se tiene que:
+
+\begin{equation}
+    \dot{q_r}=k\cdot dA_r\cdot \frac{dT}{dl_r}
+\end{equation}
+
+\begin{equation}
+    \dot{q_\phi}=k\cdot dA_\phi\cdot \frac{dT}{dl_\phi}
+\end{equation}
+
+\begin{equation}
+    \dot{q_\theta}=k\cdot dA_\theta\cdot \frac{dT}{dl_\theta}
+\end{equation}
+
+Los diferenciales de áres y longitud, corresponde a:
+
+\begin{equation}
+    dA_r=r\cdot sen\theta\cdot d\phi\cdot r\cdot d\theta 
+\end{equation}
+
+\begin{equation}
+    dA_\phi=dr\cdot r\cdot d\theta
+\end{equation}
+
+\begin{equation}
+    dA_z=dr\cdot r\cdot sen\theta\cdot d\phi
+\end{equation}
+
+\begin{equation}
+    dl_r=dr
+\end{equation}
+
+\begin{equation}
+    dl_\phi=r\cdot sen\theta\cdot d\phi
+\end{equation}
+
+\begin{equation}
+    dl_\theta=r\cdot d\theta
+\end{equation}
+
+Sustituyendo los términos, se forma la siguiente ecuación:
+
+\begin{equation}
+    \frac{d \Bigr[ k\cdot r^2sen\theta\cdot d\phi\cdot d\theta\cdot \frac{dT}{dr} \Bigr] }{dr\cdot r\cdot sen\theta\cdot d\phi\cdot rd\theta}+\frac{d \left[ k\cdot dr\cdot r\cdot d\theta\cdot \frac{dT}{r\cdot sen\theta\cdot d\phi} \right] }{dr\cdot r\cdot sen\theta\cdot d\phi\cdot rd\theta}+\frac{d \Bigr[ dr\cdot r\cdot sen\theta\cdot d\phi\cdot \frac{dT}{r\cdot d\theta} \Bigr] }{dr\cdot r\cdot sen\theta\cdot d\phi\cdot rd\theta}+\dot{g_v}=\rho\cdot C_p\cdot \frac{dT}{dt}
+\end{equation}
+
+Simplificando los términos, se llega a la ecuación final:
+
+\begin{equation}
+    \frac{1}{r^2}\frac{d}{dr}\biggr[k\cdot r^2\frac{dT}{dr}\biggr]+\frac{1}{r^2\cdot sen^2\theta}\frac{d}{d\phi}\biggr[k\cdot \frac{dT}{d\phi}\biggr]+\frac{1}{r^2sen\theta}\frac{d}{d\theta}\biggr[k\cdot sen\theta\cdot \frac{dT}{d\theta}\biggr]+\dot{g_v}=\rho\cdot C_p\cdot \frac{dT}{dt}
+\end{equation}
+
+\end{document}
